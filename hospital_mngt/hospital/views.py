@@ -18,6 +18,7 @@ def Index(request):
         return redirect ('login')
     return render(request, 'index.html')
 
+
 def Login(reguest):
     error = ""
     if reguest.method == "POST":
@@ -26,9 +27,8 @@ def Login(reguest):
         user = authenticate(username=u, password=p)
         try:
             if user.is_staff:
-                Login(reguest, user)
-                error = "No"
-
+                login(reguest, user)
+                error = "no"
             else:
                 error = "yes"
         except:
