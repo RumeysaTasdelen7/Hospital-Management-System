@@ -1,38 +1,3 @@
-{% comment %} {% include 'base.html' %}
-{% include 'navigation.html' %}
-{% block content %}
-
-{% ifequal error "no" %}
-<script>
-    alert('logged in succesfully');
-    window.location = "{% url 'home' %}";
-</script>
-{% endifequal %}
-{% ifequal error "yes" %}
-<script>
-    alert('Invalid login try again');
-</script>
-{% endifequal %}
-
-<div class="container">
-    <h2 class="text-center">Admin Login</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <label>Admin Name</label>
-        <input type="text" class="form-control" name="uname">
-        <label>Paaword</label>
-        <input type="password" class="form-control" name="pwd">
-
-        <input type="submit" value="Login" class="form-control btn btn-primary">
-
-    <form>
-</div>
-
-{% endblock content %}
-{% include 'footer.html' %} {% endcomment %}
-
-
-
 {% include 'base.html' %}
 {% include 'navigation.html' %}
 {% block content %}
@@ -40,7 +5,7 @@
 {% if error == "no" %}
 <script>
     alert('Logged in successfully');
-    window.location = "{% url 'home' %}";
+    window.location = "{% url 'dashboard' %}";
 </script>
 {% elif error == "yes" %}
 <script>

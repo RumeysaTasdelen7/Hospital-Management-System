@@ -1,0 +1,20 @@
+<div>
+    <h2>View Doctor</h2>
+    <table>
+        <thead>
+            <th>DoctorId</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Special</th>
+        </thead>
+        <tbody>
+            {% for i in doc %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.Name}}</td>
+                <td>{{i.id}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
