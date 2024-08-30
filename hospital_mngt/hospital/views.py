@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Doctor
@@ -52,3 +52,11 @@ def View_Doctor(request):
     doc = Doctor.objects.all()
     d = {'doc': doc}
     return render(request, 'view_doctor.html', d)
+
+
+def Delete_Doctor(request, pid):
+    if not request.user.is_staff:
+        return redirect('login')
+    doctor = Doctor.objects.get(id=pid)
+    doctor.delete()
+    return redirect('view_doctor')
