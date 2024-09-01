@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import Doctor
+from .models import Doctor, Patient
 
 
 def  About(request):
@@ -79,3 +79,19 @@ def Add_Doctor(request):
             error = 'yes'
     d = {'error':error}
     return render(request, 'add_doctor.html', d)
+
+
+def View_Patient(request):
+    if not request.user.is_staff:
+        return redirect('login')
+    doc = Patient.objects.all()
+    d = {'doc': doc}
+    return render(request, 'view_doctor.html', d)
+
+
+def Delete_Patient(request, pid):
+    if not request.user.is_staff:
+        return redirect('login')
+    patient = Patient.objects.get(id=pid)
+    patient.delete()
+    return redirect('view_patient')
