@@ -86,7 +86,7 @@ def View_Patient(request):
         return redirect('login')
     doc = Patient.objects.all()
     d = {'doc': doc}
-    return render(request, 'view_doctor.html', d)
+    return render(request, 'view_patient.html', d)
 
 
 def Delete_Patient(request, pid):
@@ -95,3 +95,21 @@ def Delete_Patient(request, pid):
     patient = Patient.objects.get(id=pid)
     patient.delete()
     return redirect('view_patient')
+
+
+def Add_Patient(request):
+    error = ""
+    if not request.user.is_staff:
+        return redirect('login')
+    if request.method == "POST":
+        n = request.POST['name']
+        g = request.POST['gender']
+        m = request.POST['mobile']
+        a = request.POST['address']
+        try:
+            Patient.objects.create(name=n, gender=g, mobile=m, address=a)
+            error = 'no'
+        except:
+            error = 'yes'
+    d = {'error': error}
+    return render(request, 'add_patient.html', d)
