@@ -7,6 +7,9 @@ class Doctor(models.Model):
     mobile = models.IntegerField()
     special = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.Name
+
 
 class Patient(models.Model):
     name = models.CharField(max_length=50)
@@ -14,10 +17,16 @@ class Patient(models.Model):
     mobile = models.IntegerField(null=True)
     address = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 
 class Appoinment(models.Model):
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    Doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    Patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
+
+    def __str__(self):
+        return self.Doctor.Name + "__"+ self.Patient.name
 
